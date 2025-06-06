@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Aptitude Test</title>
+    <link rel="stylesheet" href="static/test.css">
+    <script src="aptitude.js" defer></script>
+    <script src="questions.js" defer></script>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        <nav>
+            <ul>
+                <li><a href="index1.html" class="home-button">HOME</a></li>
+                <li><a href="institute.html" class="institute-button">INSTITUTES</a></li>
+                <li><a href="course.html" class="course-button">COURSES</a></li>
+                <li><a href="internship.html" class="internship-button">INTERNSHIP</a></li>
+                <li><a href="test.html" class="test">APTITUDE TEST</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="circle"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+
+    <!-- User Input Section -->
+    <div id="startContainer" class="card">
+        <h2>Welcome to the Aptitude Test</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name" required>
+        <select id="gradeSelect" required>
+            <option value="">Select your grade</option>
+            <option value="10th">10th</option>
+            <option value="12th">12th</option>
+        </select>
+        <button id="goButton">Go</button>
+    </div>
+
+    <!-- Instruction Card -->
+    <div id="instructionCard" class="card" style="display: none;">
+        <h2>Test Instructions</h2>
+        <p>🔹 Total Duration: 20 minutes</p>
+        <p>🔹 All 15 questions are compulsory</p>
+        <p>🔹 Choose the best answer for each question</p>
+        
+        <button id="startButton">Start Test</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizContainer" class="card" style="display: none;">
+        <h2>Aptitude Test</h2>
+        <p id="timerText">Time Left: 30:00</p>
+        <p id="questionText"></p>
+        <div id="options"></div>
+        <div class="navigation-buttons">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+        <button id="submitButton" disabled>Submit</button>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultContainer" style="display: none;">
+        <div class="card">
+            <p class="heading">🎉 Congratulations!</p>
+            <p id="resultMessage"></p>
+        </div>
+    </div>
+    
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userType = localStorage.getItem('userType');
+
+        if (!userType) {
+            alert('Please log in to access the aptitude test.');
+            window.location.href = 'login.html'; // Redirect to login page
+        } else if (userType === 'institute') {
+            alert('Institutes are not allowed to access the aptitude test.');
+            window.location.href = 'index1.html'; // Redirect to home page
+        }
+    });
+</script>
+</html>

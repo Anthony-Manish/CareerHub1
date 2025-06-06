@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Institutes</title>
+    <link rel="stylesheet" href="static/institute.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        <nav>
+            <ul>
+                <li><a href="index1.html" class="home-button" id="home">HOME</a></li>
+                <li><a href="institute.html" class="institute-button" id="institute">INSTITUTES</a></li>
+                <li><a href="course.html" class="course-button">COURSES</a></li>
+                <li><a href="internship.html" class="internship-button">INTERNSHIP</a></li>
+                <li><a href="test.html" class="test">APTITUDE TEST</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Background Circles -->
+    <div class="circle"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+
+    <!-- Main Content -->
+    <h1>Find Your College</h1>
+    <div>
+        <select id="degree">
+            <option value="">-- Select Degree --</option>
+            <option value="B.Sc">B.Sc</option>
+            <option value="B.A">B.A</option>
+            <option value="B.Com">B.Com</option>
+        </select>
+        <select id="location">
+            <option value="">-- Select Location --</option>
+            <option value="Sion">Sion</option>
+            <option value="Kurla">Kurla</option>
+            <option value="Churchgate">Churchgate</option>
+            <option value="Marine Lines">Marine Lines</option>
+            <option value="Andheri">Andheri</option>
+        </select>
+
+        <button onclick="fetchColleges()">Search</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+    // Function to fetch default colleges when the page loads
+    async function fetchDefaultColleges() {
+        const apiUrl = `http://127.0.0.1:5000/get_default_colleges`; // Endpoint for default colleges
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const colleges = await response.json();
+            displayColleges(colleges);
+        } catch (error) {
+            console.error('Error fetching default colleges:', error);
+            document.getElementById('results').innerHTML = `
+                <p style="color:red;">Failed to fetch default college data. Please check the API endpoint or try again later.</p>
+            `;
+        }
+    }
+
+    // Fetch colleges based on user input
+    async function fetchColleges() {
+        const degree = document.getElementById('degree').value;
+        const location = document.getElementById('location').value;
+
+        if (!degree || !location) {
+            document.getElementById('results').innerHTML = `<p style="color:red;">Please select both degree and location.</p>`;
+            return;
+        }
+
+        const apiUrl = `http://127.0.0.1:5000/get_colleges?degree=${encodeURIComponent(degree)}&location=${encodeURIComponent(location)}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const colleges = await response.json();
+            displayColleges(colleges);
+        } catch (error) {
+            console.error('Error fetching colleges:', error);
+            document.getElementById('results').innerHTML = `
+                <p style="color:red;">Sorry there is no college for the selected courses in the selected location</p>
+            `;
+        }
+    }
+
+    // Function to display college cards
+    function displayColleges(colleges) {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = ''; // Clear previous results
+
+        if (!colleges || colleges.length === 0) {
+            resultsDiv.innerHTML = `<p>No colleges found for the selected criteria.</p>`;
+            return;
+        }
+
+        colleges.forEach(college => {
+            const collegeCard = document.createElement('div');
+            collegeCard.className = 'college-card';
+
+            collegeCard.innerHTML = `
+                <img src="${college.logo}" alt="${college.name} Logo">
+                <h3>${college.name}</h3>
+                <p><strong>Location:</strong> ${college.location}</p>
+                <p><strong>Address:</strong> ${college.address}</p>
+                <p><strong>${college.description}</strong></p>
+                <a href="${college.website}" target="_blank">Visit Website</a>
+            `;
+
+            resultsDiv.appendChild(collegeCard);
+        });
+    }
+
+    // Fetch default colleges on page load
+    window.onload = fetchDefaultColleges;
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const userType = localStorage.getItem('userType');
+        const aptitudeTestLink = document.querySelector('.test');
+
+        if (userType === 'institute') {
+            aptitudeTestLink.style.display = 'none'; // Hides the aptitude test link for institutes
+        }
+    });
+    
+    </script>
+</body>
+</html>

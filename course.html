@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="static/course.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Courses</title>
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        <nav>
+            <ul>
+                <li><a href="index1.html" class="home-button" id="home">HOME</a></li>
+                <li><a href="institute.html" class="institute-button" id="institute">INSTITUTES</a></li>
+                <li><a href="course.html" class="course-button">COURSES</a></li>
+                <li><a href="internship.html" class="internship-button">INTERNSHIP</a></li>
+                <li><a href="test.html" class="test">APTITUDE TEST</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <section class="course-selection">
+        <select id="courseDropdown">
+            <option value="">-- Select a Degree --</option>
+        </select>
+    </section>
+
+    <section class="course-details">
+        <h2>Course Details</h2>
+        <div class="course-container" id="courseContainer"></div>
+    </section>
+
+    <script>
+       // Fetch and store courses globally
+let allCourses = [];
+
+async function fetchCourses() {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/get_courses');
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses');
+        }
+        allCourses = await response.json();
+        
+        populateDegreeDropdown(allCourses);
+        displayCourses(allCourses);  // Show all courses by default
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+    }
+}
+
+// Populate dropdown with unique degrees
+function populateDegreeDropdown(courses) {
+    const dropdown = document.getElementById("courseDropdown");
+    dropdown.innerHTML = '<option value="">-- Select a Degree --</option>';
+
+    const degrees = [...new Set(courses.map(course => course.degree))];
+    degrees.forEach(degree => {
+        const option = document.createElement("option");
+        option.value = degree;
+        option.textContent = degree;
+        dropdown.appendChild(option);
+    });
+}
+
+// Filter and display courses based on dropdown selection
+function filterCoursesByDegree() {
+    const selectedDegree = document.getElementById("courseDropdown").value;
+    if (!selectedDegree) {
+        displayCourses(allCourses); // Show all courses when nothing is selected
+    } else {
+        const filteredCourses = allCourses.filter(course => course.degree === selectedDegree);
+        displayCourses(filteredCourses);
+    }
+}
+
+// Display courses in the container
+function displayCourses(courses) {
+    const courseContainer = document.getElementById("courseContainer");
+    courseContainer.innerHTML = "";
+
+    if (courses.length === 0) {
+        courseContainer.innerHTML = `<p>No courses available for the selected degree.</p>`;
+        return;
+    }
+
+    courses.forEach(course => {
+        const courseBox = document.createElement("div");
+        courseBox.className = "course-box";
+        courseBox.innerHTML = `
+            <h3>${course.name}</h3>
+            <p><strong>About:</strong> ${course.about}</p>
+            <p><strong>Duration:</strong> ${course.duration}</p>
+            <p><strong>Top Colleges in Mumbai:</strong></p>
+            <ul>${course.colleges.map(college => `<li>${college}</li>`).join("")}</ul>
+            <button>Learn More</button>
+        `;
+        courseContainer.appendChild(courseBox);
+    });
+}
+
+// Fetch courses on page load and handle dropdown change
+window.onload = async function () {
+    await fetchCourses();
+
+    document.getElementById("courseDropdown").addEventListener("change", () => {
+        filterCoursesByDegree();
+    });
+};
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const userType = localStorage.getItem('userType');
+        const aptitudeTestLink = document.querySelector('.test');
+
+        if (userType === 'institute') {
+            aptitudeTestLink.style.display = 'none'; // Hides the aptitude test link for institutes
+        }
+    });
+
+
+
+    </script>
+</body>
+</html>

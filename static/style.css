@@ -1,0 +1,321 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1A171E;
+}
+.box{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    background:  #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.box::before{
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 420px;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(0deg,transparent,transparent,#b003f4,#b003f4,#b003f4);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+.box::after{
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 420px;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(0deg,transparent,transparent,#b003f4,#b003f4,#b003f4);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+.borderline
+{
+    position: absolute;
+    top: 0;
+    inset: 0;
+}
+.borderline::before
+{
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 420px;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(0deg,transparent,transparent,#f4033f,#f4033f,#f4033f);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -1.5s;
+}
+.borderline::after
+{
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 420px;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(0deg,transparent,transparent,#f4033f,#f4033f,#f4033f);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -4.5s;
+}
+@keyframes animate
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+
+.box form{
+
+        position: absolute;
+        inset: 4px;
+        background: #222;
+        padding: 50px 40px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+}
+.box form h2{
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+.box form .inputbox
+{
+    position: relative;
+    width: 300px;
+    margin-top: 35px;
+}
+.box form .inputbox input{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background:transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    color: #23242a;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index:10;
+}
+.box form .inputbox span{
+    position: absolute;
+    left: 0;
+    padding: 20px 0px 10px;
+    pointer-events: none;
+    color: #8f8f8f;
+    font-size: 1em;
+    letter-spacing: 0.5em;
+    transition: 0.5s;
+}
+.box form .inputbox input:valid ~ span,
+.box form .inputbox input:focus ~ span
+{
+    color:#fff;
+    font-size: 0.75em;
+    transform: translatey(-34px);
+}
+.box form .inputbox i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height:2px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.box form .inputbox input:valid ~ i,
+.box form .inputbox input:focus ~ i
+
+{
+    height: 44px;
+}
+.box form .links
+{
+    display: flex;
+    justify-content: space-between;
+}
+.box form .links a
+{
+    margin: 10px 0;
+    font-size: 0.75em;
+    color: #8f8f8f;
+    text-decoration: none;
+}
+.box form .links a:hover,
+.box form .link a:nth-child(2)
+{
+    color:#fff;
+}
+.box form input[type="submit"]
+{
+    border: none;
+    outline: none;
+    padding: 9px 25px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 4px;
+    font-weight: 600;
+    width: 100px;
+    margin-top: 10px;
+}
+.box form input[type="submit"]:active
+{
+    opacity: 0.8;
+}
+.logo {
+    width: 180px; 
+    height: 50%; 
+    margin-right: 20px; 
+    flex-shrink: 0; 
+    margin-top: -30px;
+    margin-left: -20px;
+    filter: drop-shadow(0 0 5px #03e9f4);
+    position: fixed;
+    top: -50px;
+    left: 50px;
+position: fixed;
+transform: rotateX(45deg);
+animation: shadowChange 12s infinite;
+}
+
+@keyframes shadowChange {
+0% {
+    filter: drop-shadow(0 0 5px #7ED4D9) drop-shadow(0 0 25px #7ED4D9) drop-shadow(0 0 50px #7ED4D9);
+}
+25% {
+    filter: drop-shadow(0 0 5px #FF5733) drop-shadow(0 0 25px #FF5733) drop-shadow(0 0 50px #FF5733);
+}
+50% {
+    filter: drop-shadow(0 0 5px #DAF7A6) drop-shadow(0 0 25px #DAF7A6) drop-shadow(0 0 50px #DAF7A6);
+}
+75% {
+    filter: drop-shadow(0 0 5px #FFC300) drop-shadow(0 0 25px #FFC300) drop-shadow(0 0 50px #FFC300);
+}
+100% {
+    filter: drop-shadow(0 0 5px #7ED4D9) drop-shadow(0 0 25px #7ED4D9) drop-shadow(0 0 50px #7ED4D9);
+}
+}
+.circle {
+    width: 20px;          
+    height: 20px;         
+    background-color: #7ED4D9;
+    box-shadow: 0 0 5px #7ED4D9,0 0 25px #7ED4D9,0 0 50px #7ED4D9,0 0 250px #7ED4D9;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+    right: 380px;
+}
+.circle1 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #f4033f;
+    box-shadow: 0 0 5px #f4033f,0 0 25px #f4033f,0 0 50px #f4033f,0 0 250px #f4033f;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 15px;            
+    right: 300px;
+}
+.circle2 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+    right: 10px;
+}
+.circle3 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 200px;            
+    right: 1140px;
+}
+.circle4 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #e4f403;
+    box-shadow: 0 0 5px #e4f403,0 0 25px #e4f403,0 0 50px #e4f403,0 0 250px #e4f403;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+              
+    right: 960px;
+}
+.circle5 {
+    width: 50px;          
+    height: 50px;  
+    border-radius: 50%;       
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4 ,0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    position: absolute;  
+    top: -75px;            
+    right: 00px;
+    z-index: 2; 
+
+    
+}
+.circle6 {
+    width: 50px;          
+    height: 50px;  
+    border-radius: 50%;       
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4 ,0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    position: absolute;  
+    bottom: -75px;            
+    left:  -40px;
+    z-index: 2; 
+
+}
+.hidden {
+    display: none;
+}

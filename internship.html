@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="static/internship.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Internships</title>
+    <script>
+        let internships = [];
+        let userType = localStorage.getItem('userType');
+
+        // Fetch internships from the database
+        async function fetchInternships() {
+            try {
+                const response = await fetch('/api/internships');
+                if (!response.ok) throw new Error('Failed to fetch internships');
+                internships = await response.json();
+                displayInternships();
+            } catch (error) {
+                console.error('Error fetching internships:', error);
+            }
+        }
+
+        // Display internships
+        function displayInternships() {
+            const container = document.getElementById('internship-container');
+            container.innerHTML = ''; // Clear previous content
+            internships.forEach((internship) => {
+                const internshipCard = document.createElement('div');
+                internshipCard.classList.add('internship-card');
+                internshipCard.innerHTML = `
+                    <h2>${internship.title}</h2>
+                    <p><strong>Company:</strong> ${internship.company}</p>
+                    <p><strong>Location:</strong> ${internship.location || 'N/A'}</p>
+                    <p><strong>Mode:</strong> ${internship.mode}</p>
+                    <p><strong>Duration:</strong> ${internship.duration}</p>
+                    <p><strong>Stipend:</strong> ${internship.stipend}</p>
+                    <p>${internship.description}</p>
+                    <a href="${internship.apply_link}" target="_blank" class="apply-button">Apply Now</a>
+                    ${userType === 'admin' ? `<button onclick="deleteInternship('${internship._id}')" class="delete-button">Delete</button>` : ''}
+
+                `;
+                container.appendChild(internshipCard);
+            });
+        }
+
+        // Open modal form and blur background (only for institute and admin)
+        function openModal() {
+            if (userType === 'institute' || userType === 'admin') {
+                document.getElementById('uploadModal').style.display = 'flex';
+                document.getElementById('content-container').classList.add('blur-background');
+            } else {
+                alert("Only institutes and admins can upload internships.");
+            }
+        }
+
+        // Close modal form and remove blur
+        function closeModal() {
+            document.getElementById('uploadModal').style.display = 'none';
+            document.getElementById('content-container').classList.remove('blur-background');
+        }
+
+        // Toggle location field based on mode selection
+        function toggleLocationField() {
+            const mode = document.getElementById('mode').value;
+            document.getElementById('location-field').style.display = mode === 'Online' ? 'none' : 'block';
+        }
+
+        // Save internship data to the database (only for institute and admin)
+        async function saveInternship() {
+            if (userType !== 'institute' && userType !== 'admin') {
+                alert("Only institutes and admins can upload internships.");
+                return;
+            }
+
+            const title = document.getElementById('title').value;
+            const company = document.getElementById('company').value;
+            const location = document.getElementById('location').value;
+            const mode = document.getElementById('mode').value;
+            const duration = document.getElementById('duration').value;
+            const stipend = document.getElementById('stipend').value;
+            const description = document.getElementById('description').value;
+            const applyLink = document.getElementById('apply_link').value;
+
+            if (!title || !company || !mode || !duration || !stipend || !description || !applyLink) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            const internshipData = {
+                title,
+                company,
+                location: mode === 'Online' ? '' : location,
+                mode,
+                duration,
+                stipend,
+                description,
+                apply_link: applyLink
+            };
+
+            try {
+                const response = await fetch('/api/internships', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(internshipData),
+                });
+
+                if (!response.ok) throw new Error('Failed to save internship');
+                await response.json();
+                fetchInternships();
+                closeModal();
+            } catch (error) {
+                console.error('Error saving internship:', error);
+            }
+        }
+
+        // Delete internship from the database (only for institute and admin)
+        async function deleteInternship(id) {
+            if (userType !== 'institute' && userType !== 'admin') {
+                alert("You do not have permission to delete internships.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/internships/${id}`, { method: 'DELETE' });
+
+                if (!response.ok) throw new Error('Failed to delete internship');
+                fetchInternships();
+            } catch (error) {
+                console.error('Error deleting internship:', error);
+            }
+        }
+
+        // Initial call to fetch and display internships
+        window.onload = function () {
+            fetchInternships();
+
+            // Hide Upload Button for students
+            if (userType !== 'institute' && userType !== 'admin') {
+                document.getElementById('upload-button').style.display = 'none';
+            }
+        };
+
+        // Hide Aptitude Test link for institutes
+        document.addEventListener('DOMContentLoaded', function() {
+            const aptitudeTestLink = document.querySelector('.test');
+            if (userType === 'institute') {
+                aptitudeTestLink.style.display = 'none';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        <nav>
+            <ul>
+                <li><a href="index1.html" class="home-button">HOME</a></li>
+                <li><a href="institute.html" class="institute-button">INSTITUTES</a></li>
+                <li><a href="course.html" class="course-button">COURSES</a></li>
+                <li><a href="internship.html" class="internship-button">INTERNSHIP</a></li>
+                <li><a href="test.html" class="test">APPTITUDE TEST</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="content-container">
+        <h1>Internship Opportunities</h1>
+
+        <!-- Upload Button (hidden for students) -->
+        <button id="upload-button" onclick="openModal()" class="upload-button">Upload Internship</button>
+
+        <div id="internship-container"></div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" class="close">&times;</span>
+            <h2>Add Internship Details</h2>
+            <label>Title:</label>
+            <input type="text" id="title" required><br>
+            <label>Company:</label>
+            <input type="text" id="company" required><br>
+            <div id="location-field">
+                <label>Location:</label>
+                <input type="text" id="location"><br>
+            </div>
+            <label>Mode:</label>
+            <select id="mode" onchange="toggleLocationField()">
+                <option>Offline</option>
+                <option>Online</option>
+                <option>Hybrid</option>
+            </select><br>
+            <label>Duration:</label>
+            <input type="text" id="duration" required><br>
+            <label>Stipend:</label>
+            <input type="text" id="stipend" required><br>
+            <label>Description:</label>
+            <textarea id="description" rows="3" required></textarea><br>
+            <label>Apply Link:</label>
+            <input type="url" id="apply_link" required><br>
+            <button onclick="saveInternship()">Save and Upload</button>
+        </div>
+    </div>
+</body>
+</html>

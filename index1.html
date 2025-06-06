@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub</title>
+    <link rel="stylesheet" href="static/style1.css">
+    <style>
+        /* Styles for the user circle and logout button */
+        #user-circle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        #user-initial {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #logout-button {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        #logout-button:hover {
+            background-color: #cc0000;
+        }
+
+        /* Tooltip for username */
+        #user-initial:hover::after {
+            content: attr(title);
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #333;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        <nav>
+            <ul>
+                <li><a href="index1.html" class="home-button" id="home">HOME</a></li>
+                <li><a href="institute.html" class="institute-button" id="institute">INSTITUTES</a></li>
+                <li><a href="course.html" class="course-button">COURSES</a></li>
+                <li><a href="internship.html" class="internship-button">INTERNSHIP</a></li>
+                <li><a href="test.html" class="test" id="aptitude-link">APTITUDE TEST</a></li>
+            </ul>
+            <button type="button" class="login" id="letsGoButton">
+                <span>Let's Go</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- User circle and logout button -->
+    <div id="user-circle" onclick="toggleLogoutButton()">
+        <div id="user-initial"></div>
+    </div>
+    <button id="logout-button" onclick="logout()">Logout</button>
+
+    <div class="imgaes">
+        <img src="image/boy.jpg" class="boy">
+        <img src="image/boy1.jpg" class="boy1">
+        <img src="image/boy2.jpg" class="boy2">
+        <img src="image/girl3.jpg" class="girl">
+        <img src="image/girl.jpg" class="girl2">
+        <img src="image/girl2.jpg" class="girl3">
+    </div>
+
+    <div class="circle"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+
+    <div class="name">
+        <h1>CareerHub</h1>
+        <img src="image/cap.png" class="cap">
+        <h3>Your Guide Towards a Better Future</h3>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const letsGoButton = document.getElementById('letsGoButton');
+            const userCircle = document.getElementById('user-circle');
+            const userInitial = document.getElementById('user-initial');
+            const logoutButton = document.getElementById('logout-button');
+            const aptitudeLink = document.getElementById('aptitude-link');
+            const userType = localStorage.getItem('userType');
+
+            if (userType) {
+                letsGoButton.style.display = 'none';
+                userCircle.style.display = 'block';
+
+                // Assign user initial based on user type
+                if (userType === 'student') {
+                    userInitial.style.backgroundColor = '#17fd77e1';
+                    userInitial.textContent = 'S';
+                    userCircle.setAttribute('title', 'Hello Student');
+                } else if (userType === 'institute') {
+                    userInitial.style.backgroundColor = '#b003f4';
+                    userInitial.textContent = 'I';
+                    userCircle.setAttribute('title', 'Hello Institute');
+                    aptitudeLink.style.display = 'none';
+                } else if (userType === 'admin') {
+                    userInitial.style.backgroundColor = '#f4033f';
+                    userInitial.textContent = 'M';
+                    userCircle.setAttribute('title', 'Hello Boss');
+                }
+            } else {
+                userCircle.style.display = 'none';
+                letsGoButton.addEventListener('click', () => {
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+
+        // Toggle logout button visibility
+        function toggleLogoutButton() {
+            const logoutButton = document.getElementById('logout-button');
+            logoutButton.style.display = logoutButton.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Logout user
+        function logout() {
+            const confirmLogout = confirm('Are you sure you want to log out?');
+            if (confirmLogout) {
+                localStorage.removeItem('userType');
+                document.getElementById('user-circle').style.display = 'none';
+                document.getElementById('logout-button').style.display = 'none';
+                document.getElementById('letsGoButton').style.display = 'block';
+                window.location.href = 'index1.html';
+            }
+        }
+        document.body.style.overflow = 'hidden';
+    </script>
+</body>
+</html>

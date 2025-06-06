@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Login and Signup</title>
+    <script src="login.js"></script> <!-- Include the login.js file -->
+    <link rel="stylesheet" href="static/style.css">
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        // JavaScript function to toggle between Sign-in and Sign-up forms
+        function toggleForms() {
+            document.querySelector(".signin-box").classList.toggle("hidden");
+            document.querySelector(".signup-box").classList.toggle("hidden");
+        }
+
+        // Function to validate password match
+        function validatePassword() {
+            const password = document.querySelector("#signup-form input[name='password']").value;
+            const confirmPassword = document.querySelector("#signup-form input[name='confirm_password']").value;
+
+            if (!password || !confirmPassword) {
+                alert("Please fill in both password fields.");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+
+        // Function to toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+
+        // Function to handle login form submission
+        async function handleLogin(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(event.target);
+            const userType = event.target.getAttribute('data-user-type'); // Get user type from form attribute
+            const endpoint = `/${userType}`;
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                // Store user data in localStorage
+                localStorage.setItem('usernameInitial', result.usernameInitial);
+                localStorage.setItem('userType', result.userType);
+
+                // Redirect to home page
+                window.location.href = result.redirectUrl || 'index1.html'; // Default to index1.html if redirectUrl is not provided
+            } else {
+                alert(result.message); // Show error message
+            }
+        }
+
+        // Function to handle signup form submission
+        async function handleSignup(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            if (!validatePassword()) {
+                return; // Stop if password validation fails
+            }
+
+            const formData = new FormData(event.target);
+            const userType = event.target.getAttribute('data-user-type'); // Get user type from form attribute
+            const endpoint = `/${userType}`;
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert(result.message); // Show success message
+                toggleForms(); // Switch to login form
+            } else {
+                alert(result.message); // Show error message
+            }
+        }
+
+        // Attach event listeners to forms
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('signin-form').addEventListener('submit', handleLogin);
+            document.getElementById('signup-form').addEventListener('submit', handleSignup);
+        });
+        
+    document.addEventListener('DOMContentLoaded', function() {
+        const userType = localStorage.getItem('userType');
+        const aptitudeTestLink = document.querySelector('.test');
+
+        if (userType === 'institute') {
+            aptitudeTestLink.style.display = 'none'; // Hides the aptitude test link for institutes
+        }
+    });
+    </script>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="/login.html">
+            <img src="image/logo1.png" class="logo" alt="CareerHub Logo">
+        </a>
+    </div>
+
+    <div class="circle"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+
+    <!-- Sign-in Form -->
+    <div class="box signin-box">
+        <span class="borderline"></span>
+        <form id="signin-form" data-user-type="institute">
+            <input type="hidden" name="action" value="login">
+            <h2>Institute Sign In</h2>
+            <div class="inputbox">
+                <input type="email" name="email" required="required">
+                <span>Email</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="password" id="signin-password" required="required">
+                <span>Password</span>
+                <i></i>
+                <i class="fas fa-eye show-password-icon" id="signin-eye" aria-label="Toggle password visibility" onclick="togglePasswordVisibility('signin-password', 'signin-eye')"></i>
+            </div>
+            <div class="links">
+                <a href="#">Forgot Password</a>
+                <a href="#" onclick="toggleForms()">Signup</a>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <!-- Sign-up Form -->
+    <div class="box signup-box hidden">
+        <span class="borderline"></span>
+        <form id="signup-form" data-user-type="institute">
+            <input type="hidden" name="action" value="register">
+            <h2>Institute Sign Up</h2>
+            <div class="inputbox">
+                <input type="text" name="username" required="required">
+                <span>Username</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="email" name="email" required="required">
+                <span>Email</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="password" id="signup-password" required="required">
+                <span>Password</span>
+                <i></i>
+                <i class="fas fa-eye show-password-icon" id="signup-eye" aria-label="Toggle password visibility" onclick="togglePasswordVisibility('signup-password', 'signup-eye')"></i>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="confirm_password" id="confirm-password" required="required">
+                <span>Confirm Password</span>
+                <i></i>
+                <i class="fas fa-eye show-password-icon" id="confirm-eye" aria-label="Toggle password visibility" onclick="togglePasswordVisibility('confirm-password', 'confirm-eye')"></i>
+            </div>
+            <div class="links">
+                <a href="#" onclick="toggleForms()">Already have an account? Sign In</a>
+            </div>
+            <input type="submit" value="Signup">
+        </form>
+    </div>
+</body>
+</html>

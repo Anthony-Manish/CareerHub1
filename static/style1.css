@@ -1,0 +1,543 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1A171E;
+    
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center; 
+    padding: 5px 40px; 
+    background-color: #1A171E;
+    z-index: 1;
+    position: relative; 
+    top: 0;
+    width: 100%;
+}
+
+
+.logo {
+    width: 180px; 
+    height: auto; 
+    margin-right: 20px; 
+    flex-shrink: 0; 
+    margin-top: -30px;
+    margin-left: -20px;
+    filter: drop-shadow(0 0 5px #03e9f4);
+
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0; 
+    padding: 0; 
+}
+
+
+nav ul li {
+    margin-left: 55px; 
+    font-size: medium;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.home-button{
+    display: inline-block;
+    
+    text-decoration: none;
+    text-align: center;
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 250px #03e9f4;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0005);
+    filter: hue-rotate(80deg);
+    
+    position: relative;
+   
+}
+.home-button:hover {
+    
+    border-style: solid;
+  border-color: #1f201b;
+  -webkit-text-fill-color: #000505;
+   
+}
+
+.institute-button{
+    display: inline-block;
+    color: #fff;
+    
+    text-decoration: none;
+    text-align: center;
+
+    
+    position: relative;
+    transition: color 0.3s;
+}
+.institute-button:hover {
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 250px #03e9f4;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0005);
+    filter: hue-rotate(175deg);
+}
+
+.course-button{
+    display: inline-block;
+    color: #fff;
+    
+    text-decoration: none;
+    text-align: center;
+    
+    
+    position: relative;
+    transition: color 0.3s;
+}
+.course-button:hover {
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,0 0 25px #03e9f4,0 0 50px #03e9f4,0 0 250px #03e9f4;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0005);
+    filter: hue-rotate(225deg);
+}
+
+.internship-button{
+    display: inline-block;
+    color: #fff;
+    
+    text-decoration: none;
+    text-align: center;
+    
+    
+    position: relative;
+    transition: color 0.3s;
+}
+.internship-button:hover {
+    background: #1ef35ee5;
+    color: #050801;
+    box-shadow: 0 0 5px #1ef35ee5,0 0 25px #1ef35ee5,0 0 50px #1ef35ee5,0 0 250px #1ef35ee5;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0005);
+   
+}
+.test{
+    display: inline-block;
+    color: #fff;
+    
+    text-decoration: none;
+    text-align: center;
+    
+    
+    position: relative;
+    transition: color 0.3s;
+    
+}
+.test:hover {
+    background: #40c0f3e5;
+    color: #050801;
+    box-shadow: 0 0 5px #40c0f3e5,0 0 25px #40c0f3e5,0 0 50px #40c0f3e5,0 0 250px#40c0f3e5;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0005);
+}
+
+
+.girl3 {
+    width: 110px;
+    height: 390px;
+    border-radius: 100px;
+    
+    position: absolute;   
+    top: -70px;            
+    right: 150px;
+    z-index: 10;
+}
+.boy1 {
+    width: 100px;
+    height: 270px;
+    border-radius: 100px;
+    
+    position: absolute;   
+    top:420px;            
+    right: 280px;
+    z-index: 10;
+}
+.boy2 {
+    width: 110px;
+    height: 350px;
+    border-radius: 100px;
+    
+    position: absolute;   
+    top: 350px;            
+    right: 150px;
+    z-index: 10;
+}
+.girl {
+    width: 100px;
+    height: 250px;
+    border-radius: 100px;
+    z-index: 10;
+    position: absolute;   
+    top:440px;            
+    right: 40px;
+    
+}
+.boy {
+   
+    z-index: 10;
+    width: 100px;
+    height: 320px;
+    border-radius: 100px;
+    
+    position: absolute;   
+    top: 90px;            
+    right: 40px;
+    
+}
+.girl2 {
+    width: 100px;
+    height: 300px;
+    border-radius: 100px;
+    z-index: 10;
+    position: absolute;   
+    top:60px;            
+    right: 280px;
+    
+    
+}
+.girl2:hover {
+    box-shadow: 0 0 10px rgba(244, 3, 63, 0.8), 0 0 30px rgba(244, 3, 63, 0.8), 0 0 60px rgba(244, 3, 63, 0.8);
+}
+
+.girl:hover {
+    box-shadow: 0 0 10px rgba(176, 3, 244, 0.8), 0 0 30px rgba(176, 3, 244, 0.8), 0 0 60px rgba(176, 3, 244, 0.8);
+}
+
+.boy:hover {
+    box-shadow: 0 0 10px rgba(49, 75, 226, 0.8), 0 0 30px rgba(49, 75, 226, 0.8), 0 0 60px rgba(49, 75, 226, 0.8);
+}
+
+.boy2:hover {
+    box-shadow: 0 0 10px rgba(249, 215, 47, 0.8), 0 0 30px rgba(249, 215, 47, 0.8), 0 0 60px rgba(249, 215, 47, 0.8);
+}
+
+.boy1:hover {
+    box-shadow: 0 0 10px rgba(126, 212, 217, 0.8), 0 0 30px rgba(126, 212, 217, 0.8), 0 0 60px rgba(126, 212, 217, 0.8);
+}
+
+.girl3:hover {
+    box-shadow: 0 0 10px rgba(30, 243, 94, 0.8), 0 0 30px rgba(30, 243, 94, 0.8), 0 0 60px rgba(30, 243, 94, 0.8);
+}
+
+
+.circle {
+    width: 20px;          
+    height: 20px;         
+    background-color: #7ED4D9;
+    box-shadow: 0 0 5px #7ED4D9,0 0 25px #7ED4D9,0 0 50px #7ED4D9,0 0 250px #7ED4D9;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+    right: 380px;
+}
+.circle1 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #f4033f;
+    box-shadow: 0 0 5px #f4033f,0 0 25px #f4033f,0 0 50px #f4033f,0 0 250px #f4033f;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 15px;            
+    right: 300px;
+}
+.circle2 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+    right: 10px;
+}
+.name h1 {
+    position: absolute;   
+    top: 280px;            
+    right: 920px;
+    font-size: 55px;
+    color: white;
+    animation: shadowChange 12s infinite;
+}
+
+
+@keyframes shadowChange {
+    0% {
+        text-shadow: 0 0 5px #7ED4D9, 0 0 25px #7ED4D9, 0 0 50px #7ED4D9, 0 0 250px #7ED4D9;
+    }
+    25% {
+        text-shadow: 0 0 5px #FF5733, 0 0 25px #FF5733, 0 0 50px #FF5733, 0 0 250px #FF5733;
+    }
+    50% {
+        text-shadow: 0 0 5px #DAF7A6, 0 0 25px #DAF7A6, 0 0 50px #DAF7A6, 0 0 250px #DAF7A6;
+    }
+    75% {
+        text-shadow: 0 0 5px #FFC300, 0 0 25px #FFC300, 0 0 50px #FFC300, 0 0 250px #FFC300;
+    }
+    100% {
+        text-shadow: 0 0 5px #7ED4D9, 0 0 25px #7ED4D9, 0 0 50px #7ED4D9, 0 0 250px #7ED4D9;
+    }
+}
+
+
+
+.name h3{
+    color: white;
+    text-shadow:  0 0 5px #000505,0 0 25px #000a0a,0 0 50px #000f0f,0 0 250px #000b0c;
+    position: absolute;   
+    top: 340px;            
+    right:810px;
+    letter-spacing: 2px;
+    text-decoration: underline;
+}
+.cap {
+    width: 72px;
+    height: 72px;
+    position: absolute;   
+    top: 250px;            
+    right: 1148px;
+    transform: rotateX(45deg);
+    animation: shadowChange 12s infinite;
+}
+
+@keyframes shadowChange {
+    0% {
+        filter: drop-shadow(0 0 5px #7ED4D9) drop-shadow(0 0 25px #7ED4D9) drop-shadow(0 0 50px #7ED4D9);
+    }
+    25% {
+        filter: drop-shadow(0 0 5px #FF5733) drop-shadow(0 0 25px #FF5733) drop-shadow(0 0 50px #FF5733);
+    }
+    50% {
+        filter: drop-shadow(0 0 5px #DAF7A6) drop-shadow(0 0 25px #DAF7A6) drop-shadow(0 0 50px #DAF7A6);
+    }
+    75% {
+        filter: drop-shadow(0 0 5px #FFC300) drop-shadow(0 0 25px #FFC300) drop-shadow(0 0 50px #FFC300);
+    }
+    100% {
+        filter: drop-shadow(0 0 5px #7ED4D9) drop-shadow(0 0 25px #7ED4D9) drop-shadow(0 0 50px #7ED4D9);
+    }
+}
+
+.circle3 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 200px;            
+    right: 1140px;
+}
+.circle4 {
+    width: 20px;          
+    height: 20px;         
+    background-color: #e4f403;
+    box-shadow: 0 0 5px #e4f403,0 0 25px #e4f403,0 0 50px #e4f403,0 0 250px #e4f403;
+    border-radius: 50%;   
+    position: absolute;   
+    top: 400px;            
+              
+    right: 960px;
+}
+.circle5 {
+    width: 50px;          
+    height: 50px;  
+    border-radius: 50%;       
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4 ,0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    position: absolute;  
+    top: -75px;            
+    right: 00px;
+    z-index: 2; 
+
+    
+}
+.circle6 {
+    width: 50px;          
+    height: 50px;  
+    border-radius: 50%;       
+    background-color: #b003f4;
+    box-shadow: 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4 ,0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4, 0 0 5px #b003f4,0 0 25px #b003f4,0 0 50px #b003f4,0 0 250px #b003f4;
+    position: absolute;  
+    bottom: -75px;            
+    left:  -40px;
+    z-index: 2; 
+
+    
+}
+
+
+
+/* Circle Style (Applied after login) */
+.login.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    top: 20px; /* Move to top-right after login */
+    right: 20px; /* Move to top-right after login */
+    bottom: auto;
+    left: auto;
+    transform: none;
+    transition: all 0.5s ease; /* Smooth transition for all properties */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Hover Effect for Circle */
+.login.circle:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Hide the button text when in circle mode */
+.login.circle span {
+    display: none;
+    transition: opacity 0.3s ease; /* Smooth fade-out for text */
+}
+
+/* Animation for Button Transformation */
+@keyframes transformToCircle {
+    0% {
+        width: 150px;
+        height: 50px;
+        border-radius: 25px;
+        top: 400px;
+        right: 810px;
+        transform: translateX(-50%);
+    }
+    100% {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        top: 20px;
+        right: 20px;
+        transform: none;
+    }
+}
+
+/* Apply Animation on Login */
+.login.circle {
+    animation: transformToCircle 0.5s ease forwards; /* Apply animation */
+}
+
+/* Animation for Button Reversion */
+@keyframes revertToRectangle {
+    0% {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        top: 20px;
+        right: 20px;
+        transform: none;
+    }
+    100% {
+        width: 150px;
+        height: 50px;
+        border-radius: 25px;
+        top: 400px;
+        right: 810px;
+        transform: translateX(-50%);
+    }
+}
+
+/* Apply Animation on Logout */
+.login.revert {
+    animation: revertToRectangle 0.5s ease forwards; /* Apply animation */
+}
+
+
+.login{
+    cursor: pointer;      
+    background-color: #e4f403;
+    box-shadow: 0 0 5px #e4f403,0 0 25px #e4f403,0 0 50px #e4f403,0 0 250px #e4f403;  
+    position: absolute;   
+    font-weight:bolder;
+    color: #050801;
+height: 20%;
+width: 7%;
+top: 380px;            
+    right:810px;
+
+  
+    
+    
+}
+
+.login:hover {
+    
+    border-style: solid;
+  border-color: #1f201b;
+  -webkit-text-fill-color: #000505;
+  background-color: #DAF7A6;
+   
+}
+
+
+
+#user-circle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+
+#logout-button {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#logout-button:hover {
+    background-color: #cc0000;
+}
+
+/* Tooltip for username */
+#user-initial:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+}
